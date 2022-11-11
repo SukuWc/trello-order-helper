@@ -38,12 +38,7 @@ TrelloPowerUp.initialize({
           // Trello will call this if the user clicks on this action
           // we could for example open a new popover...
           console.log(list)
-          var t = window.TrelloPowerUp.iframe();
-          t.popup({
-            message: 'Powered-Up Successfully 🎉',
-            duration: 6,
-          });
-          
+          alert(list)          
           
         }
       }];
