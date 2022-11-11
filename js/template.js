@@ -5,12 +5,13 @@ var Promise = TrelloPowerUp.Promise;
 var getIdBadge = function(t){
   return Promise.all([
     t.get('board', 'shared', 'prefix', '#'),
+    t.get('board', 'shared', 'firstIssue', '0'),
     t.card('idShort').get('idShort')
   ])
   .then(function(result){
     return [{
       title: 'Card Number', // for detail badges only
-      text: result[0] + (result[1])
+      text: result[0] + (result[2]+parseInt(result[1]))
     }];
   })
 };
@@ -42,14 +43,15 @@ TrelloPowerUp.initialize({
 
           return Promise.all([
             t.get('board', 'shared', 'prefix', '#'),
+            t.get('board', 'shared', 'firstIssue', '0'),
             t.cards("all")
           ])
           .then(function(result){
             console.log("Prefix = "+result[0])
 
-            let cards = result[1]
+            let cards = result[2]
 
-            let msg = "Prefix = "+ result[0] +"\n" 
+            let msg = "" 
 
             cards.forEach(element => {
               if (element.idList === list.id){
@@ -57,7 +59,7 @@ TrelloPowerUp.initialize({
                 console.log(element)
 
                 element.par
-                msg+= `[ED-${element.idShort} ${element.name}](https://trello.com/c/${element.id}) \n`
+                msg+= `[${result[0]}${parseInt(element.idShort) + parseInt(result[1])} ${element.name}](https://trello.com/c/${element.id}) \n`
               }
             });
 
