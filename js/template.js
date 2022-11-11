@@ -40,10 +40,6 @@ TrelloPowerUp.initialize({
           console.log(list)
           alert(list)       
         
-          t.card('all').then((cards) =>{
-            console.log(cards)
-            return 1;
-          })
           // more complex alert
           t.alert({
             message: 'Powered-Up Successfully 🎉',
@@ -52,6 +48,11 @@ TrelloPowerUp.initialize({
           
         }
       }];
+    });
+  },  
+  "board-buttons": function (t, opts) {
+    return t.cards("all").then(function (cards) {
+      console.log(JSON.stringify(cards, null, 2));
     });
   }
 });
