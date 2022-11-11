@@ -52,17 +52,14 @@ TrelloPowerUp.initialize({
               }
             });
 
-            navigator.clipboard.writeText(msg).then(()=>{
-
-              console.log(msg)
-              // more complex alert
-              t.alert({
-                message: 'Powered-Up Successfully 🎉\n' + msg,
-                duration: 20,
-              });
-
-            })
-
+            console.log(msg)
+            
+            alert(msg)
+            // more complex alert
+            t.alert({
+              message: 'Powered-Up Successfully 🎉\n' + msg,
+              duration: 20,
+            });
 
 
           });
