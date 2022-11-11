@@ -10,7 +10,7 @@ var getIdBadge = function(t){
   .then(function(result){
     return [{
       title: 'Card Number', // for detail badges only
-      text: result[0] + (result[1]*2)
+      text: result[0] + (result[1])
     }];
   })
 };
@@ -33,16 +33,23 @@ TrelloPowerUp.initialize({
     return t.list('name', 'id')
     .then(function (list) {
       return [{
-        text: "Get List Stats",
+        text: "Generate Release Note",
         callback: function (t) {
           // Trello will call this if the user clicks on this action
           // we could for example open a new popover...
           console.log(list) 
         
 
-          return t.cards("all").then(function (cards) {
+          return Promise.all([
+            t.get('board', 'shared', 'prefix', '#'),
+            t.cards("all")
+          ])
+          .then(function(result){
+            console.log("Prefix = "+result[0])
 
-            let msg = ""
+            let cards = result[1]
+
+            let msg = "Prefix = "+ result[0] +"\n" 
 
             cards.forEach(element => {
               if (element.idList === list.id){
@@ -62,7 +69,6 @@ TrelloPowerUp.initialize({
               message: 'Powered-Up Successfully 🎉\n' + msg,
               duration: 20,
             });
-
 
           });
           
