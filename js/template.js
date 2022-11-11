@@ -10,7 +10,7 @@ var getIdBadge = function(t){
   .then(function(result){
     return [{
       title: 'Card Number', // for detail badges only
-      text: result[0] + result[1]
+      text: result[0] + (result[1]*2)
     }];
   })
 };
