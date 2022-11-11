@@ -39,15 +39,7 @@ TrelloPowerUp.initialize({
           // we could for example open a new popover...
           console.log(list)
           alert(list)       
-          
-          var t = TrelloPowerUp.iframe();
-
-          // simplest alert requires just a message
-          // displays for 5 seconds using the 'info' display
-          t.alert({
-            message: 'Powering-Up, give us a second...'
-          });
-
+        
           // more complex alert
           t.alert({
             message: 'Powered-Up Successfully 🎉',
