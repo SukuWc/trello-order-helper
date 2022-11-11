@@ -39,9 +39,11 @@ TrelloPowerUp.initialize({
           // we could for example open a new popover...
           console.log(list)
           t.popup({
-            // ...
-            
+            message: 'Powered-Up Successfully 🎉',
+            duration: 6,
           });
+          
+          
         }
       }];
     });
