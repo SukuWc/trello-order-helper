@@ -40,7 +40,9 @@ TrelloPowerUp.initialize({
           console.log(list)
           alert(list)       
         
-          console.log(t.card('all'))
+          t.card('all').then((cards) =>{
+            console.log(cards)
+          })
           // more complex alert
           t.alert({
             message: 'Powered-Up Successfully 🎉',
