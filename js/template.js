@@ -39,18 +39,23 @@ TrelloPowerUp.initialize({
           // we could for example open a new popover...
           console.log(list) 
         
-          // more complex alert
-          // t.alert({
-          //   message: 'Powered-Up Successfully 🎉',
-          //   duration: 6,
-          // });
 
           return t.cards("all").then(function (cards) {
+
+            let msg = ""
+
             cards.forEach(element => {
               if (element.idList === list.id){
                 console.log(element.name)
                 console.log(element)
+                msg+= `ED-${element.idShort} ${element.name} \n`
               }
+            });
+
+            // more complex alert
+            t.alert({
+              message: 'Powered-Up Successfully 🎉\n' + msg,
+              duration: 20,
             });
           });
           
