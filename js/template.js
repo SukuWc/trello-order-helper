@@ -30,14 +30,15 @@ TrelloPowerUp.initialize({
     });
   },
   'list-actions': function (t) {
-    return t
-    .then(function (t) {
+    return t.list('name', 'id')
+    .then(function (list) {
       return [{
         text: "Get List Stats",
         callback: function (t) {
           // Trello will call this if the user clicks on this action
           // we could for example open a new popover...
-          console.log(t.list('name', 'id'))
+          console.log(list)
+          var t = window.TrelloPowerUp.iframe();
           t.popup({
             message: 'Powered-Up Successfully 🎉',
             duration: 6,
@@ -49,4 +50,3 @@ TrelloPowerUp.initialize({
     });
   }
 });
-
