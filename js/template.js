@@ -48,7 +48,9 @@ TrelloPowerUp.initialize({
               if (element.idList === list.id){
                 console.log(element.name)
                 console.log(element)
-                msg+= `[ED-${element.idShort} ${element.name}](${element.id}) \n`
+
+                element.par
+                msg+= `[ED-${element.idShort} ${element.name}](https://trello.com/c/${element.id}) \n`
               }
             });
 
