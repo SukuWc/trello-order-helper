@@ -42,6 +42,7 @@ TrelloPowerUp.initialize({
         
           t.card('all').then((cards) =>{
             console.log(cards)
+            return 1;
           })
           // more complex alert
           t.alert({
