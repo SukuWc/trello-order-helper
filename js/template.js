@@ -77,10 +77,5 @@ TrelloPowerUp.initialize({
         }
       }];
     });
-  },  
-  "board-buttons": function (t, opts) {
-    return t.cards("all").then(function (cards) {
-      console.log(JSON.stringify(cards, null, 2));
-    });
   }
 });
