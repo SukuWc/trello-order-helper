@@ -22,7 +22,7 @@ TrelloPowerUp.initialize({
           console.log(list) 
         
           return Promise.all([
-            t.get('board', 'shared', 'productList', '[PO16, BU16, PBF4, EN16, EF44, KNOT]'),
+            t.get('board', 'shared', 'productList', ''),
             t.cards("all")
           ])
           .then(function(result){

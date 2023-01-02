@@ -7,7 +7,7 @@ var productListSelector = document.getElementById('productList');
 
 t.render(function(){
   return Promise.all([
-    t.get('board', 'shared', 'productList', '[PO16, BU16, PBF4, EN16, EF44, KNOT]'),
+    t.get('board', 'shared', 'productList', ''),
   ])
   .spread(function(savedProductList){
     productListSelector.value = savedProductList;
