@@ -25,6 +25,7 @@ TrelloPowerUp.initialize({
             t.cards("all")
           ])
           .then(function(result){
+            console.log("result[0]: "+result[0])
             let productArray = JSON.parse(result[0]);
 
             // initialize count array
