@@ -3,17 +3,14 @@
 var Promise = TrelloPowerUp.Promise;
 var t = TrelloPowerUp.iframe();
 
-var prefixSelector = document.getElementById('prefix');
-var firstIssueSelector = document.getElementById('firstIssue');
+var productListSelector = document.getElementById('productList');
 
 t.render(function(){
   return Promise.all([
-    t.get('board', 'shared', 'prefix', '#'),
-    t.get('board', 'shared', 'firstIssue', '0'),
+    t.get('board', 'shared', 'productList', '[PO16, BU16, PBF4, EN16, EF44, KNOT]'),
   ])
-  .spread(function(savedPrefix, savedFirstIssue){
-    prefixSelector.value = savedPrefix;
-    firstIssueSelector.value = savedFirstIssue;
+  .spread(function(savedProductList){
+    productListSelector.value = savedProductList;
   })
   .then(function(){
     t.sizeTo('#content')
@@ -24,8 +21,7 @@ t.render(function(){
 document.getElementById('save').addEventListener('click', function(){
 
   return Promise.all([
-    t.set('board', 'shared', 'prefix', prefixSelector.value),
-    t.set('board', 'shared', 'firstIssue', firstIssueSelector.value)
+    t.set('board', 'shared', 'productList', productListSelector.value)
   ]).then(function(){
     t.closePopup();
   })
