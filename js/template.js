@@ -2,27 +2,7 @@
 
 var Promise = TrelloPowerUp.Promise;
 
-var getIdBadge = function(t){
-  return Promise.all([
-    t.get('board', 'shared', 'prefix', '#'),
-    t.get('board', 'shared', 'firstIssue', '0'),
-    t.card('idShort').get('idShort')
-  ])
-  .then(function(result){
-    return [{
-      title: 'Card Number', // for detail badges only
-      text: result[0] + (result[2]+parseInt(result[1]))
-    }];
-  })
-};
-
 TrelloPowerUp.initialize({
-  'card-badges': function(t, options){
-    return getIdBadge(t);
-  },
-  'card-detail-badges': function(t, options) {
-    return getIdBadge(t);
-  },
   'show-settings': function(t, options){
     return t.popup({
       title: 'Settings',
@@ -34,33 +14,52 @@ TrelloPowerUp.initialize({
     return t.list('name', 'id')
     .then(function (list) {
       return [{
-        text: "Generate Release Note",
+        text: "Generate Summary",
         callback: function (t) {
           // Trello will call this if the user clicks on this action
           // we could for example open a new popover...
           console.log(list) 
         
-
           return Promise.all([
-            t.get('board', 'shared', 'prefix', '#'),
-            t.get('board', 'shared', 'firstIssue', '0'),
+            t.get('board', 'shared', 'productList', '[PO16, BU16, PBF4, EN16, EF44, KNOT]'),
             t.cards("all")
           ])
           .then(function(result){
-            console.log("Prefix = "+result[0])
+            let productArray = JSON.parse(result[0]);
 
-            let cards = result[2]
+            // initialize count array
+            let countArray = new Array(productArray.length).fill(0);
+            
+
+            console.log("Products: ", productArray);
+
+
+            let cards = result[1]
 
             let msg = "" 
 
-            cards.forEach(element => {
-              if (element.idList === list.id){
-                console.log(element.name)
-                console.log(element)
 
-                element.par
-                msg+= `[${result[0]}${parseInt(element.idShort) + parseInt(result[1])} ${element.name}](https://trello.com/c/${element.id}) \n`
-              }
+            productArray.forEach((productName, index) => {
+              cards.forEach(element => {
+
+                if (element.idList === list.id){
+
+                  let string = element.name;
+                  let regexp = "/(\d+)\bx"+productName+"/;"
+                  let match = regexp.exec(string);
+                  if (match) {
+                    let number = parseInt(match[1]);
+                    console.log(`The number is ${productName} ${number}`);
+                    countArray[index]++;
+                  }
+
+                }
+              
+              });
+
+
+              msg+= `${productName}:  ${countArray[index]}\n` 
+
             });
 
             console.log(msg)
