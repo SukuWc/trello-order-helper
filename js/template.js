@@ -41,6 +41,9 @@ TrelloPowerUp.initialize({
 
 
             productArray.forEach((productName, index) => {
+
+              console.log("Product " + index +" is " + productName)
+
               cards.forEach(element => {
 
                 if (element.idList === list.id){
