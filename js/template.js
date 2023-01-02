@@ -18,6 +18,7 @@ TrelloPowerUp.initialize({
         callback: function (t) {
           // Trello will call this if the user clicks on this action
           // we could for example open a new popover...
+          console.log("Version 1.3")
           console.log(list) 
         
           return Promise.all([
@@ -35,6 +36,7 @@ TrelloPowerUp.initialize({
             console.log("Products: ", productArray);
 
 
+            console.log("result[1]: "+result[1])
             let cards = result[1]
 
             let msg = "" 
