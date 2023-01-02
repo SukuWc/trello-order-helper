@@ -18,7 +18,7 @@ TrelloPowerUp.initialize({
         callback: function (t) {
           // Trello will call this if the user clicks on this action
           // we could for example open a new popover...
-          console.log("Version 1.3")
+          console.log("Version 1.4")
           console.log(list) 
         
           return Promise.all([
@@ -50,11 +50,13 @@ TrelloPowerUp.initialize({
 
                 if (element.idList === list.id){
 
+          
+
                   let string = element.name;
-                  let regexp = "/(\d+)\bx"+productName+"/;"
+                  let regexp = new RegExp(`[0-9]*x${productName}`, "gi");
                   let match = regexp.exec(string);
                   if (match) {
-                    let number = parseInt(match[1]);
+                    let number = parseInt(match);
                     console.log(`The number is ${productName} ${number}`);
                     countArray[index]++;
                   }
